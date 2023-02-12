@@ -1,30 +1,39 @@
+def getQueryResults(n, queries):
 
-def twosum(nums, t, s):
+    results = []
 
-        d = {}
+    #
+    # We calculate the goodArray
+    #
+    goodArray = []
+    powerIndex = -1
 
-        for i, n in enumerate(nums):
-            # if n==s: continue
-            diff = t - n
+    while(n != 0):
 
-            if diff in d and s not in [i, d[diff]]:
-                return [i, d[diff]]
-                 
-            d[n] = i
+        powerIndex = powerIndex + 1
 
-        return [-1, -1]
+        if((n % 2) == 1):
+            goodArray.append(pow(2, powerIndex))
+
+        n = (int) (n / 2)
 
 
-def longestConsecutive(nums):
-    res = set()
-        for i, n in enumerate(nums):
-            a, b = twosum(nums, -n, i)
+    #
+    # Now, we resolve the queries.
+    #
+    for i in range(0, len(queries)):
 
-            if a==-1 and b==-1:
-                continue
-            elif a!=b and b!=i and i!=a:
-                res.add(tuple(sorted([nums[a],nums[b],n])))
+        l = queries[i][0]
+        r = queries[i][1]
+        m = queries[i][2]
 
-        return [list(r) for r in res]
+        product = 1
+        for j in range(l - 1, r):
+            product = product * goodArray[j]
 
-print(longestConsecutive([-1,0,1,2,-1,-4,-2,-3,3,0,4]))
+        results.append(product % m)
+
+
+    return results
+
+print(getQueryResults(6, [[1,2,4], [2,2,8], [1,1,4]]))
