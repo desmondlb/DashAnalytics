@@ -66,7 +66,6 @@ const Product = ({
 const Products = () => {
     const {data, isLoading} = useGetProductsQuery();
     const isNonMobile = useMediaQuery("(min-width: 1000px)");
-    console.log("data", data);
 
   return (
     // rem = root em, everything remains proportional to the initial starting point.
